@@ -4,6 +4,9 @@ on:
   push:
     paths-ignore:
       - "**.md"
+      - docker/**
+      - Docker.mod
+      - .github/workflows/build-modded.yml
     branches:
       - main
   pull_request:
