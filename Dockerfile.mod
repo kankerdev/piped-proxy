@@ -1,5 +1,7 @@
 FROM nginx:mainline
 
+ENV UDS=1 BIND_UNIX=/var/run/piped-proxy/actix.sock
+
 WORKDIR /app/
 
 RUN apt-get update && \
