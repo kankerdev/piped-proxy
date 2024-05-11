@@ -27,6 +27,16 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 async fn main() -> std::io::Result<()> {
     println!("Running server!");
 
+    let _env_vars = ["UDS", "BIND_UNIX", "PROXY", "PROXY_USER", "PROXY_PASS"];
+    for v in _env_vars.into_iter{
+        println!(
+            "{var_name}: {var_value}", 
+            var_name=v, 
+            var_value=env::var("BIND_UNIX")
+                .unwrap_or_else(|_| "NUL".to_string())
+        );
+    }
+
     let server = HttpServer::new(|| {
         // match all requests
         App::new().default_service(web::to(index))
@@ -65,7 +75,6 @@ static CLIENT: Lazy<Client> = Lazy::new(|| {
     let builder = if let Some(proxy) = proxy {
         // proxy basic auth
         if let Ok(proxy_auth_user) = env::var("PROXY_USER") {
-            println!("PROXY_USER: {}", proxy_auth_user); // debug
             let proxy_auth_pass = env::var("PROXY_PASS").unwrap_or_default();
             builder.proxy(proxy.basic_auth(&proxy_auth_user, &proxy_auth_pass))
         } else {
