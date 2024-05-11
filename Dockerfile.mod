@@ -10,6 +10,7 @@ RUN mkdir -p /var/run/piped-proxy
 
 COPY ./docker/nginx/nginx.conf /etc/nginx/
 COPY ./docker/nginx/conf.d/app.conf /etc/nginx/conf.d/
+COPY ./docker/nginx/conf.d/proxy.conf /etc/nginx/snippets/
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/
 
 COPY ./bin/piped-proxy /app/piped-proxy
