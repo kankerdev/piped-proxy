@@ -67,6 +67,7 @@ static CLIENT: Lazy<Client> = Lazy::new(|| {
         if let Ok(proxy_auth_user) = env::var("PROXY_USER") {
             let proxy_auth_pass = env::var("PROXY_PASS").unwrap_or_default();
             builder.proxy(proxy.basic_auth(&proxy_auth_user, &proxy_auth_pass))
+            println!("PROXY_USER: {}", proxy_auth_user); // debug
         } else {
             builder.proxy(proxy)
         }
