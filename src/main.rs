@@ -28,7 +28,7 @@ async fn main() -> std::io::Result<()> {
     println!("Running server!");
 
     let _env_vars = ["UDS", "BIND_UNIX", "PROXY", "PROXY_USER", "PROXY_PASS"];
-    for v in _env_vars.into_iter{
+    for v in _env_vars.into_iter() {
         println!(
             "{var_name}: {var_value}", 
             var_name=v, 
