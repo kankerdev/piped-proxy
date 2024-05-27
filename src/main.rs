@@ -147,6 +147,13 @@ async fn index(req: HttpRequest) -> Result<HttpResponse, Box<dyn Error>> {
         return Ok(response.finish());
     }
 
+    // HealthCheck
+    if req.method() == Method::GET && req.path().eq("/ping") {
+        let mut response = HttpResponse::Ok();
+        add_headers(&mut response);
+        return Ok(response.finish());        
+    }
+    
     // parse query string
     let mut query = QString::from(req.query_string());
 
